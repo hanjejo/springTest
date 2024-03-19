@@ -42,7 +42,7 @@ public class UserController {
     @PostMapping("/")
     public User createUser(@RequestBody User user) {
         User createdUser = userRepository.save(user);
-        if (createdUser.getUsername().equals("조한제"))
+        if (createdUser.getUsername().equals("홍길동"))
             throw new RuntimeException();
         if ((long) createdUser.getOrders().size() != 0)
             return null;
@@ -53,5 +53,15 @@ public class UserController {
         }
 
         return createdUser;
+    }
+
+    @PostMapping("/test/create")
+    public void createUser() {
+        User user = User.builder()
+                .email("test@Email.com")
+                .username("홍길동2")
+                .build();
+
+        userRepository.save(user);
     }
 }
